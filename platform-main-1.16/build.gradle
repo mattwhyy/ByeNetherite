@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(16))
+}
+
+tasks.withType(Jar) {
+    archiveBaseName.set("ByeNetherite-1.01")
+    archiveVersion.set("1.16")  // Optional version suffix
+    archiveClassifier.set("")   // Removes platform-main-1.16 suffix
+}
+
+processResources {
+    def props = [version: rootProject.version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}

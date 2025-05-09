@@ -1,1 +1,9 @@
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.7.0'
+}
+
 rootProject.name = 'ByeNetherite'
+
+include("platform-main-1.16")
+include("platform-main-1.18")
+

@@ -1,5 +1,6 @@
 package net.mattwhyy.byenetherite;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -43,18 +44,21 @@ public class ByeNetherite extends JavaPlugin implements Listener {
     }
 
 
+
     private void removeNetheriteSmithingRecipes() {
-        Iterator<Recipe> it = getServer().recipeIterator();
-        while (it.hasNext()) {
-            Recipe recipe = it.next();
-            if (recipe instanceof SmithingRecipe) {
-                SmithingRecipe smithingRecipe = (SmithingRecipe) recipe;
-                ItemStack result = smithingRecipe.getResult();
-                if (result != null && disabledUpgrades.getOrDefault(result.getType(), false)) {
-                    it.remove();
-                    getLogger().info("Removed Netherite upgrade for: " + result.getType().name());
+        Bukkit.getScheduler().runTask(this, () -> {
+            Iterator<Recipe> it = getServer().recipeIterator();
+            while (it.hasNext()) {
+                Recipe recipe = it.next();
+                if (recipe instanceof SmithingRecipe) {
+                    SmithingRecipe smithingRecipe = (SmithingRecipe) recipe;
+                    ItemStack result = smithingRecipe.getResult();
+                    if (result != null && disabledUpgrades.getOrDefault(result.getType(), false)) {
+                        it.remove();
+                        getLogger().info("Removed Netherite upgrade for: " + result.getType().name());
+                    }
                 }
             }
-        }
+        });
     }
 }

@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT"
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+tasks.withType(Jar) {
+    archiveBaseName.set("ByeNetherite-1.01")
+    archiveVersion.set("1.18")  // Optional version suffix
+    archiveClassifier.set("")   // Removes platform-main-1.16 suffix
+}
+
+processResources {
+    def props = [version: rootProject.version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
