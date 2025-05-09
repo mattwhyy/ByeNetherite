@@ -1,0 +1,11 @@
+bye-netherite:
+  # Disable Netherite items by setting them to 'true'
+  helmet: true
+  chestplate: true
+  leggings: true
+  boots: true
+  sword: true
+  pickaxe: true
+  axe: true
+  shovel: true
+  hoe: true
